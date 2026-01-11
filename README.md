@@ -43,6 +43,10 @@ npm run dev
 - 変更はブラウザの `localStorage` に保存されます
 - 既定URLを変更したい場合は `src/App.jsx` の `DEFAULT_GAS_URL` を編集してください
 
+## 彼女の立替入力
+- 画面上部の「彼女の立替入力」に金額を入れると、彼女の支払額から差し引かれます
+- 入力値は年月ごとに `localStorage` に保存されます
+
 ## 技術スタック
 - React 18
 - Vite

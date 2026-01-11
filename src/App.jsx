@@ -32,6 +32,13 @@ const writeLocalStorage = (key, value) => {
   }
 };
 
+const parseYenInput = (value) => {
+  const cleaned = String(value || '').replace(/[^0-9]/g, '');
+  return cleaned ? parseInt(cleaned, 10) : 0;
+};
+
+const getGirlfriendAdvanceKey = (year, month) => `girlfriend_advance_${year}-${month}`;
+
 const App = () => {
   const envGasUrl = (import.meta.env.VITE_GAS_URL || '').trim();
   const storedGasUrl = readLocalStorage('gas_url');
@@ -44,6 +51,16 @@ const App = () => {
   const [isConfiguring, setIsConfiguring] = useState(!initialGasUrl);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+  const [girlfriendAdvanceInput, setGirlfriendAdvanceInput] = useState(() => {
+    return readLocalStorage(getGirlfriendAdvanceKey(new Date().getFullYear(), new Date().getMonth() + 1)) || '';
+  });
+
+  const girlfriendAdvance = useMemo(() => parseYenInput(girlfriendAdvanceInput), [girlfriendAdvanceInput]);
+
+  useEffect(() => {
+    const stored = readLocalStorage(getGirlfriendAdvanceKey(selectedYear, selectedMonth));
+    setGirlfriendAdvanceInput(stored || '');
+  }, [selectedYear, selectedMonth]);
 
   const availableYears = useMemo(() => {
     if (!data) return [new Date().getFullYear()];
@@ -141,23 +158,25 @@ const App = () => {
     const sharedHalf = Math.floor(sharedTotal / 2);
     const totalBilling = RENT_AND_UTILITIES_FIXED + sharedHalf + fullReimburseTotal;
     const myAdvanceTotal = RENT_AND_UTILITIES_FIXED + sharedTotal + fullReimburseTotal;
+    const girlfriendPayment = totalBilling - girlfriendAdvance;
 
     return {
       totalBilling,
       myAdvanceTotal,
-      girlfriendPayment: totalBilling,
+      girlfriendPayment,
       summary: {
         rent: RENT_AND_UTILITIES_FIXED,
         shared: sharedTotal,
         sharedHalf,
-        full: fullReimburseTotal
+        full: fullReimburseTotal,
+        girlfriendAdvance
       },
       bySubcategory,
       details: [...sharedDetails, ...fullReimburseDetails].sort(
         (a, b) => new Date(b.date) - new Date(a.date)
       )
     };
-  }, [data, selectedYear, selectedMonth]);
+  }, [data, selectedYear, selectedMonth, girlfriendAdvance]);
 
   const saveConfig = (event) => {
     event.preventDefault();
@@ -270,6 +289,30 @@ const App = () => {
         </div>
       </header>
 
+      <div className="bg-white p-4 rounded-2xl border shadow-sm mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+          <div className="flex-1">
+            <h2 className="text-sm font-semibold text-gray-900">彼女の立替入力</h2>
+            <p className="text-xs text-gray-500">入力した金額は彼女の支払額から差し引かれます。</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              inputMode="numeric"
+              className="w-40 text-right p-2 border border-gray-300 rounded-lg text-sm"
+              placeholder="例: 12000"
+              value={girlfriendAdvanceInput}
+              onChange={(event) => {
+                const cleaned = event.target.value.replace(/[^0-9]/g, '');
+                setGirlfriendAdvanceInput(cleaned);
+                writeLocalStorage(getGirlfriendAdvanceKey(selectedYear, selectedMonth), cleaned);
+              }}
+            />
+            <span className="text-sm text-gray-500">円</span>
+          </div>
+        </div>
+      </div>
+
       {report && report.details.length === 0 && (
         <div className="bg-white p-12 rounded-2xl border shadow-sm text-center">
           <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
@@ -296,6 +339,11 @@ const App = () => {
               <p className="text-sm opacity-80 mb-1">彼女の支払額</p>
               <p className="text-3xl font-bold">¥{report.girlfriendPayment.toLocaleString()}</p>
               <p className="text-xs mt-3 opacity-70">今月の精算額</p>
+              {report.summary.girlfriendAdvance > 0 && (
+                <p className="text-xs mt-1 opacity-70">
+                  立替入力: -¥{report.summary.girlfriendAdvance.toLocaleString()}
+                </p>
+              )}
             </div>
           </div>
 
@@ -362,6 +410,16 @@ const App = () => {
                   <span className="text-gray-500">立替全額(100%)</span>
                   <span className="font-semibold text-emerald-600">
                     ¥{report.summary.full.toLocaleString()}
+                  </span>
+                </div>
+                <div className="flex justify-between py-2 border-b">
+                  <span className="text-gray-500">彼女の立替入力</span>
+                  <span>¥{report.summary.girlfriendAdvance.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between py-2 border-b">
+                  <span className="text-gray-500">差引後の彼女支払額</span>
+                  <span className="font-semibold text-emerald-600">
+                    ¥{report.girlfriendPayment.toLocaleString()}
                   </span>
                 </div>
               </div>
