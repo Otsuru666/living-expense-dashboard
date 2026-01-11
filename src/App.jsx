@@ -158,7 +158,8 @@ const App = () => {
     const sharedHalf = Math.floor(sharedTotal / 2);
     const totalBilling = RENT_AND_UTILITIES_FIXED + sharedHalf + fullReimburseTotal;
     const myAdvanceTotal = RENT_AND_UTILITIES_FIXED + sharedTotal + fullReimburseTotal;
-    const girlfriendPayment = totalBilling - girlfriendAdvance;
+    const girlfriendAdvanceHalf = Math.floor(girlfriendAdvance / 2);
+    const girlfriendPayment = totalBilling - girlfriendAdvanceHalf;
 
     return {
       totalBilling,
@@ -169,7 +170,8 @@ const App = () => {
         shared: sharedTotal,
         sharedHalf,
         full: fullReimburseTotal,
-        girlfriendAdvance
+        girlfriendAdvance,
+        girlfriendAdvanceHalf
       },
       bySubcategory,
       details: [...sharedDetails, ...fullReimburseDetails].sort(
@@ -293,7 +295,7 @@ const App = () => {
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="flex-1">
             <h2 className="text-sm font-semibold text-gray-900">彼女の立替入力</h2>
-            <p className="text-xs text-gray-500">入力した金額は彼女の支払額から差し引かれます。</p>
+            <p className="text-xs text-gray-500">入力額の折半分が彼女の支払額から差し引かれます。</p>
           </div>
           <div className="flex items-center gap-2">
             <input
@@ -341,7 +343,7 @@ const App = () => {
               <p className="text-xs mt-3 opacity-70">今月の精算額</p>
               {report.summary.girlfriendAdvance > 0 && (
                 <p className="text-xs mt-1 opacity-70">
-                  立替入力: -¥{report.summary.girlfriendAdvance.toLocaleString()}
+                  立替入力(折半): -¥{report.summary.girlfriendAdvanceHalf.toLocaleString()}
                 </p>
               )}
             </div>
@@ -413,8 +415,12 @@ const App = () => {
                   </span>
                 </div>
                 <div className="flex justify-between py-2 border-b">
-                  <span className="text-gray-500">彼女の立替入力</span>
+                  <span className="text-gray-500">彼女の立替入力(合計)</span>
                   <span>¥{report.summary.girlfriendAdvance.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between py-2 border-b">
+                  <span className="text-gray-500">差引(折半分)</span>
+                  <span>-¥{report.summary.girlfriendAdvanceHalf.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between py-2 border-b">
                   <span className="text-gray-500">差引後の彼女支払額</span>
