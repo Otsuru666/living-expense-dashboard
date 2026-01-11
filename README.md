@@ -29,7 +29,7 @@
 npm install
 npm run dev
 ```
-初回起動時に表示される設定画面へ、GASのURLを入力してください。
+初回起動時は既定のGAS URLで自動取得します。変更する場合のみ設定画面で入力してください。
 
 ## GitHub Pagesで公開
 1. GitHubにこのリポジトリを作成してpush
@@ -41,6 +41,7 @@ npm run dev
 ## GAS URLの変更
 - 画面右上の歯車アイコンから再設定できます
 - 変更はブラウザの `localStorage` に保存されます
+- 既定URLを変更したい場合は `src/App.jsx` の `DEFAULT_GAS_URL` を編集してください
 
 ## 技術スタック
 - React 18

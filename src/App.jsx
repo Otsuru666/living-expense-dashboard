@@ -13,6 +13,8 @@ const RENT_AND_UTILITIES_FIXED = 40000;
 const SHARED_SUBCATEGORIES = ["日用品", "デート（立替）", "外食", "食費", "普段使い（立替）", "旅費"];
 const FULL_REIMBURSE_SUBCATEGORY = "立替（全額）";
 const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'];
+const DEFAULT_GAS_URL =
+  'https://script.google.com/macros/s/AKfycbxBbgtIC0A7rmRO-TxoQfSJgpagbSmN8GP0Ui_6AtfGQB40ZzMVvE8-EvzYePpoe4Rc/exec';
 
 const readLocalStorage = (key) => {
   try {
@@ -33,7 +35,7 @@ const writeLocalStorage = (key, value) => {
 const App = () => {
   const envGasUrl = (import.meta.env.VITE_GAS_URL || '').trim();
   const storedGasUrl = readLocalStorage('gas_url');
-  const initialGasUrl = storedGasUrl || envGasUrl;
+  const initialGasUrl = storedGasUrl || envGasUrl || DEFAULT_GAS_URL;
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
