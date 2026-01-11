@@ -294,8 +294,8 @@ const App = () => {
       <div className="bg-white p-4 rounded-2xl border shadow-sm mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="flex-1">
-            <h2 className="text-sm font-semibold text-gray-900">彼女の立替入力</h2>
-            <p className="text-xs text-gray-500">入力額の折半分が彼女の支払額から差し引かれます。</p>
+            <h2 className="text-sm font-semibold text-gray-900">幸恵の立替入力</h2>
+            <p className="text-xs text-gray-500">入力額の折半分が幸恵の支払額から差し引かれます。</p>
           </div>
           <div className="flex items-center gap-2">
             <input
@@ -333,12 +333,12 @@ const App = () => {
               <p className="text-xs mt-3 opacity-70">家賃・光熱費(4万) + 折半分 + 全額立替</p>
             </div>
             <div className="bg-white rounded-2xl p-6 border shadow-sm">
-              <p className="text-sm text-gray-500 mb-1">私の立替総額</p>
+              <p className="text-sm text-gray-500 mb-1">優翔の立替総額</p>
               <p className="text-3xl font-bold text-gray-900">¥{report.myAdvanceTotal.toLocaleString()}</p>
               <p className="text-xs mt-3 text-gray-400">実際に支払った総額</p>
             </div>
             <div className="bg-emerald-600 text-white rounded-2xl p-6 shadow-lg shadow-emerald-200">
-              <p className="text-sm opacity-80 mb-1">彼女の支払額</p>
+              <p className="text-sm opacity-80 mb-1">幸恵の支払額</p>
               <p className="text-3xl font-bold">¥{report.girlfriendPayment.toLocaleString()}</p>
               <p className="text-xs mt-3 opacity-70">今月の精算額</p>
               {report.summary.girlfriendAdvance > 0 && (
@@ -415,7 +415,7 @@ const App = () => {
                   </span>
                 </div>
                 <div className="flex justify-between py-2 border-b">
-                  <span className="text-gray-500">彼女の立替入力(合計)</span>
+                  <span className="text-gray-500">幸恵の立替入力(合計)</span>
                   <span>¥{report.summary.girlfriendAdvance.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between py-2 border-b">
@@ -423,7 +423,7 @@ const App = () => {
                   <span>-¥{report.summary.girlfriendAdvanceHalf.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between py-2 border-b">
-                  <span className="text-gray-500">差引後の彼女支払額</span>
+                  <span className="text-gray-500">差引後の幸恵支払額</span>
                   <span className="font-semibold text-emerald-600">
                     ¥{report.girlfriendPayment.toLocaleString()}
                   </span>
