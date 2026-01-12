@@ -15,7 +15,6 @@
     "recharts": "^2.12.7"
   },
   "devDependencies": {
-    "@tailwindcss/line-clamp": "^0.4.4",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.18",
     "postcss": "^8.4.35",
