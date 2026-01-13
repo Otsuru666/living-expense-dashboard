@@ -386,7 +386,7 @@ const App = () => {
                   <span className="text-xs text-white/50 uppercase tracking-wider">Total</span>
                 </div>
                 <p className="text-sm text-white/70 mb-1">請求額合計</p>
-                <p className="font-display text-4xl font-semibold text-white tracking-tight">
+                <p className="font-display text-6xl font-bold text-white tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                   ¥{report.totalBilling.toLocaleString()}
                 </p>
                 <p className="text-xs mt-4 text-white/40">家賃・光熱費 + 折半分 + 全額立替</p>
@@ -400,7 +400,7 @@ const App = () => {
                   <span className="text-xs text-white/50 uppercase tracking-wider">Paid</span>
                 </div>
                 <p className="text-sm text-white/70 mb-1">優翔の立替総額</p>
-                <p className="font-display text-4xl font-semibold text-white tracking-tight">
+                <p className="font-display text-6xl font-bold text-white tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                   ¥{report.myAdvanceTotal.toLocaleString()}
                 </p>
                 <p className="text-xs mt-4 text-white/40">実際に支払った総額</p>
