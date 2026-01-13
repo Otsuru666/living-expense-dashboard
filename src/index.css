@@ -145,7 +145,7 @@ body {
 
 .animate-fade-in-up {
   animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  opacity: 0;
+  /* opacity: 0; この行を削除: アニメーションが実行されない場合でもカードが表示されるようにする */
 }
 
 .animate-delay-1 { animation-delay: 0.1s; }

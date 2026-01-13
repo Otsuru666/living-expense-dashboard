@@ -377,7 +377,7 @@ const App = () => {
         {report && report.details.length > 0 && (
           <>
             {/* Summary Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
               <div className="summary-card-primary rounded-3xl p-6 animate-fade-in-up animate-delay-2 group hover:scale-[1.02] transition-transform duration-300">
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -414,7 +414,7 @@ const App = () => {
                   <span className="text-xs text-white/70 uppercase tracking-wider">Due</span>
                 </div>
                 <p className="text-sm text-white/80 mb-1">幸恵の支払額</p>
-                <p className="font-display text-4xl font-semibold text-white tracking-tight">
+                <p className="font-display text-6xl font-bold text-white tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                   ¥{report.girlfriendPayment.toLocaleString()}
                 </p>
                 <p className="text-xs mt-4 text-white/60">今月の精算額</p>
