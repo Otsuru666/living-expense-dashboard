@@ -565,7 +565,7 @@ const App = () => {
                             className={`category-badge px-3 py-1.5 rounded-full text-xs font-semibold ${
                               item.subcategory === FULL_REIMBURSE_SUBCATEGORY
                                 ? 'bg-coral-500/20 text-coral-400'
-                                : 'bg-teal-500/20 text-teal-400'
+                                : 'bg-gold/20 text-gold'
                             }`}
                           >
                             {item.subcategory}

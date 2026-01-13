@@ -29,6 +29,11 @@
 npm install
 npm run dev
 ```
+通常は `http://127.0.0.1:5173/` で開けます（`localhost` でも可）。
+開けない場合は以下で起動してください。
+```bash
+npm run dev -- --host 127.0.0.1 --port 5173
+```
 初回起動時は既定のGAS URLで自動取得します。変更する場合のみ設定画面で入力してください。
 
 ## GitHub Pagesで公開
