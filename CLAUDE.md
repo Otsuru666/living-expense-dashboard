@@ -16,8 +16,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 1. **Plan（計画）**: タスクを分析し、細分化した実行計画を立てる
 2. **Do（実行）**: Task agentに細分化したタスクを委託して実行させる
-3. **Check（確認）**: 実行結果を検証し、品質・動作を確認する
-4. **Act（改善）**: 問題があれば修正タスクを作成し、再度agentに委託する
+3. **Check（確認）**: 実行結果を検証し、品質・動作を確認する。実際のWebサイトの修正確認は、local環境でclaude in Chromeを使用して行うこと。
+4. **Act（改善）**: 問題があれば修正タスクを作成し、再度agentに委託する。
 
 ### Agent委託の指針
 
